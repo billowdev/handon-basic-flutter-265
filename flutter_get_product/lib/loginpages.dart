@@ -17,6 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final LocalStorage storage = LocalStorage('user-key');
+  static String apiUrl = dotenv.env['API_URL'].toString();
   String? username;
   String? password;
   @override
@@ -91,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _login(acc) async {
-    var urlLogin = Uri.http('apiUrl', '/api/login');
+    var urlLogin = Uri.http(apiUrl, '/api/login');
     var header = {'Content-Type': 'application/json'};
     final response =
         await http.post(urlLogin, headers: header, body: jsonEncode(acc));

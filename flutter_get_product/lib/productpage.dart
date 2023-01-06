@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_23_12_2022/models/news.model.dart';
 import 'package:flutter_23_12_2022/models/product.model.dart';
+import 'package:flutter_23_12_2022/product.detail.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
@@ -30,6 +31,7 @@ class _ProductPageState extends State<ProductPage> {
   // List<dynamic>? products;
   var products = [];
   int productLength = 0;
+  static String apiUrl = dotenv.env['API_URL'].toString();
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +56,12 @@ class _ProductPageState extends State<ProductPage> {
             subtitle: Text(
                 '${products[index]['detail']}\nวันที่ ${products[index]['date']}\nจำนวนคนดู: ${products[index]['view']}'),
             onTap: () async {
-              // Uri urlx = Uri.parse("${news[index].url}");
-              // await launchUrl(urlx);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProductDetailPage(
+                            id: products[index]['id'].toString(),
+                          )));
             },
           );
         },
@@ -68,9 +74,9 @@ class _ProductPageState extends State<ProductPage> {
 
   _getProduct() async {
     // var queryParam = {"country": "th", "apiKey": "your-api-key"};
-    var urlNews = Uri.http('apiurl', '/api/product');
+    var urlNews = Uri.http(apiUrl, '/api/product');
     String accessToken = token.getItem('user-key');
-    print("${dotenv.env['API_URL']}");
+
     var header = {
       'Content-Type': 'application/json',
       'Authorization': accessToken

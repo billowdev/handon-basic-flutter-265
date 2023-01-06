@@ -3,8 +3,8 @@ import 'package:flutter_23_12_2022/homepages.dart';
 import 'package:flutter_23_12_2022/welcomepage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main()  {
-   dotenv.load();
+Future<void> main() async {
+  await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 
