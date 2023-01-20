@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class CameraPage extends StatefulWidget {
   final CameraDescription camera;
@@ -57,6 +58,7 @@ class _CameraPageState extends State<CameraPage> {
             await _initialControllerFuture;
             final image = await _controller.takePicture();
             final im = File(image.path);
+            ImageGallerySaver.saveImage(im.readAsBytesSync());
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -84,3 +86,7 @@ class DisplayPictureScreen extends StatelessWidget {
     );
   }
 }
+
+
+// [camera, image_picker] Image is rotated after taking photo #35334
+// https://github.com/flutter/flutter/issues/35334
