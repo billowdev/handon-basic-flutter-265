@@ -29,7 +29,7 @@ class _NewsPageState extends State<NewsPage> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: Text('หน้าข่าววันนี้'),
+        title: Text('หน้าข่าววันนี้-สอบกลางภาค'),
       ),
       body: ListView.separated(
         itemCount: news.length,
@@ -59,10 +59,7 @@ class _NewsPageState extends State<NewsPage> {
   }
 
   _getNews() async {
-    var queryParam = {
-      "country": "th",
-      "apiKey": "your-api-key"
-    };
+    var queryParam = {"country": "th", "apiKey": "your-api-key"};
     var urlNews = Uri.http('newsapi.org', '/v2/top-headlines', queryParam);
 
     final response = await http.get(urlNews);
