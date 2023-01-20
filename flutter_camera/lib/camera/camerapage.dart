@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +50,37 @@ class _CameraPageState extends State<CameraPage> {
               );
             }
           }),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.camera_alt),
+        onPressed: () async {
+          try {
+            await _initialControllerFuture;
+            final image = await _controller.takePicture();
+            final im = File(image.path);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DisplayPictureScreen(
+                          imagePath: image.path,
+                        )));
+          } catch (e) {
+            print(e);
+          }
+        },
+      ),
+    );
+  }
+}
+
+class DisplayPictureScreen extends StatelessWidget {
+  final String imagePath;
+  const DisplayPictureScreen({super.key, required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Display the picture')),
+      body: Image.file(File(imagePath)),
     );
   }
 }
