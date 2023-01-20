@@ -1,6 +1,7 @@
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_camera/camera/camerapage.dart';
 
 class MyHomePage extends StatefulWidget {
   final String pageTitle;
@@ -21,9 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
           home: Scaffold(
             appBar: AppBar(
               title: Text(pageTitle),
-              bottom: TabBar(onTap: (index) {
-                
-              }, tabs: const <Tab>[
+              bottom: TabBar(onTap: (index) {}, tabs: const <Tab>[
                 Tab(icon: Icon(Icons.home)),
                 Tab(icon: Icon(Icons.camera)),
                 Tab(icon: Icon(Icons.camera_alt)),

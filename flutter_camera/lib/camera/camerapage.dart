@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -11,6 +12,8 @@ class CameraPage extends StatefulWidget {
 class _CameraPageState extends State<CameraPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text("hello camera page"),
+    );
   }
 }
